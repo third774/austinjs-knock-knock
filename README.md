@@ -4,7 +4,19 @@
 
 ## Development
 
-You will be utilizing Wrangler for local development to emulate the Cloudflare runtime. This is already wired up in your package.json as the `dev` script:
+You will need to create `.dev.vars`
+
+```sh
+touch .dev.vars
+```
+
+In `.dev.vars`, you need to add
+
+```sh
+export WEBHOOK_URL=<your_webhook_url>
+```
+
+Once that's done, you can run
 
 ```sh
 # start the remix dev server and wrangler
