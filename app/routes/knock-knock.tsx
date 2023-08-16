@@ -19,12 +19,19 @@ async function postMessageToDiscord(webhookUrl: string, message: string) {
 }
 
 export const loader = async ({ context }: LoaderArgs) => {
-  await postMessageToDiscord(
-    context.env.WEBHOOK_URL,
-    `Someone is at the door: ${new Date().toLocaleTimeString("en-US", {
+  const message = `Someone is at the door: ${new Date().toLocaleTimeString(
+    "en-US",
+    {
       timeZone: "America/Chicago",
-    })}`
-  );
+    }
+  )}`;
+  if (context.env.WEBHOOK_URL) {
+    await postMessageToDiscord(context.env.WEBHOOK_URL, message);
+  } else {
+    console.log(
+      "WEBHOOK_URL missing, would have sent the following message: \n" + message
+    );
+  }
   return null;
 };
 
