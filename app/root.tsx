@@ -1,5 +1,4 @@
-import type { LinksFunction } from "@remix-run/cloudflare";
-import { cssBundleHref } from "@remix-run/css-bundle";
+import type { LinksFunction, V2_MetaFunction } from "@remix-run/cloudflare";
 import {
   Links,
   LiveReload,
@@ -8,10 +7,13 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import styles from "./tailwind.css";
 
-export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-];
+export const meta: V2_MetaFunction = () => {
+  return [{ title: "Austin JavaScript Meetup" }];
+};
+
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export default function App() {
   return (
@@ -22,7 +24,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="p-3 md:p-8 lg:p-12 text-slate-900">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
