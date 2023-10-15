@@ -31,9 +31,7 @@ export default function Index() {
   return (
     <div className="max-w-lg mx-auto space-y-6">
       <h1 className="font-bold text-3xl">Austin JavaScript Meetup</h1>
-      <p className="text-slate-700">
-        👋 Hello! Scan the QR code to have us let you in!
-      </p>
+      <p>👋 Hello! Scan the QR code to have us let you in!</p>
       <a className="block" href={link}>
         <QRCodeSVG
           width={undefined}

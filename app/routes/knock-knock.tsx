@@ -110,7 +110,7 @@ export default function Index() {
       <p className="text-sm">
         Join us on{" "}
         <a
-          className="underline text-violet-500"
+          className="underline text-violet-500 dark:text-violet-300"
           href="https://discord.gg/4RZUtBwQ"
         >
           Discord
