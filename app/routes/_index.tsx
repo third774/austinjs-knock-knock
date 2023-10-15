@@ -1,11 +1,27 @@
 import { json, type LoaderArgs } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import { QRCodeSVG } from "qrcode.react";
+import invariant from "tiny-invariant";
+import { KV_DATE_NAMESPACE } from "~/constants";
 import logo from "../logo.svg";
 
-export const loader = async ({ request: { url } }: LoaderArgs) => {
-  const link = new URL(url);
+export const loader = async ({ context, request }: LoaderArgs) => {
+  const url = new URL(request.url);
+
+  const hours = Number(url.searchParams.get("hours") ?? 24);
+  invariant(!isNaN(hours));
+  const eventId = crypto.randomUUID();
+  const expiry = new Date();
+  expiry.setHours(expiry.getHours() + hours);
+
+  console.log("putting", KV_DATE_NAMESPACE + eventId, expiry.toISOString());
+
+  await context.env.KV.put(KV_DATE_NAMESPACE + eventId, expiry.toISOString());
+
+  const link = new URL(url.origin);
   link.pathname = "/knock-knock";
+  link.searchParams.set("eventId", eventId);
+
   return json({ link });
 };
 
