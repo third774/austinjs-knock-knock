@@ -111,7 +111,7 @@ export default function Index() {
         Join us on{" "}
         <a
           className="underline text-violet-500 dark:text-violet-300"
-          href="https://discord.gg/4RZUtBwQ"
+          href="https://discord.gg/sZ9Nejm88J"
         >
           Discord
         </a>
