@@ -60,13 +60,22 @@ export const loader = async ({ request, context }: LoaderArgs) => {
       timeZone: timezone,
     },
   )} (${timezone})`;
-  if (context.env.WEBHOOK_URL && !knockedRecently) {
+  if (
+    context.env.WEBHOOK_URL &&
+    context.env.ENABLED === "true" &&
+    !knockedRecently
+  ) {
     await postMessageToDiscord(context.env.WEBHOOK_URL, message);
   } else {
-    console.log(
-      "WEBHOOK_URL missing, would have sent the following message: \n" +
-        message,
-    );
+    if (context.env.WEBHOOK_URL === undefined) {
+      console.log(
+        "WEBHOOK_URL missing, would have sent the following message: \n" +
+          message,
+      );
+    }
+    if (context.env.ENABLED === undefined) {
+      console.log("ENABLED is not set to true, doing nothing");
+    }
   }
 
   return json(

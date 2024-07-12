@@ -11,6 +11,7 @@ declare module "@remix-run/server-runtime" {
   export interface AppLoadContext {
     env: {
       WEBHOOK_URL?: string;
+      ENABLED?: string;
       KV: KVNamespace;
     };
   }
