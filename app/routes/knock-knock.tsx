@@ -111,8 +111,8 @@ export default function Index() {
             🛎️ We've been notified that you're at the door, someone will be
             right there to let you in!
           </p>
-          <p className="text-pink-700 dark:text-pink-400">
-            You will need to sign in at the table on the right.
+          <p className="text-pink-700 dark:text-pink-400 font-bold">
+            You will need to sign in at the tablet.
           </p>
         </>
       )}
